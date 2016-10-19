@@ -1,0 +1,19 @@
+[2016-10-19 18:59:42,043] Parsing file..
+[2016-10-19 18:59:42,046] Checking cecdebdffaabefdcdefeddecbbffebefdabcebcaabdebbecacbddceddadb with 30 clauses and 26 variables.
+[2016-10-19 18:59:42,048] Simplified to 30 clauses and 6 variables.
+[2016-10-19 18:59:42,048] Difficulty: 158466 options.
+[2016-10-19 18:59:42,064] Starting 4 threads over 11 starting points:
+[2016-10-19 19:00:08,444]   Starting point 1/11 lead to a dead end
+[2016-10-19 19:00:47,553]   Starting point 2/11 lead to a dead end
+[2016-10-19 19:00:49,482]   Starting point 3/11 lead to a dead end
+[2016-10-19 19:01:20,654]   Starting point 4/11 lead to a dead end
+[2016-10-19 19:01:22,816]   Starting point 5/11 lead to a dead end
+[2016-10-19 19:08:28,859]   Starting point 6/11 lead to a dead end
+[2016-10-19 19:08:34,971]   Starting point 7/11 lead to a dead end
+[2016-10-19 19:08:35,184]   Starting point 8/11 lead to a dead end
+[2016-10-19 19:09:51,698]   Starting point 9/11 lead to a dead end
+[2016-10-19 19:22:09,608]   Starting point 10/11 lead to a dead end
+[2016-10-19 19:43:25,683]   Starting point 11/11 lead to a dead end
+[2016-10-19 19:43:25,722] No solution found
+[2016-10-19 19:43:25,722] Time taken: 0:43:43.678607
+

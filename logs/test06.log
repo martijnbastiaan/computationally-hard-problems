@@ -1,0 +1,44 @@
+[2016-10-19 19:51:31,041] Parsing file..
+[2016-10-19 19:51:31,044] Checking bddeeafegcegdfcfceedecfbfbbdgbfebgeagafcbcebgegfbgcebfgdgceb with 20 clauses and 26 variables.
+[2016-10-19 19:51:31,046] Simplified to 20 clauses and 7 variables.
+[2016-10-19 19:51:31,047] Difficulty: 2612736 options.
+[2016-10-19 19:51:31,063] Starting 4 threads over 9 starting points:
+[2016-10-19 19:51:31,066]   Starting point 1/9 lead to a dead end
+[2016-10-19 19:51:31,067]   Starting point 2/9 lead to a dead end
+[2016-10-19 19:51:31,069]   Starting point 3/9 lead to a dead end
+[2016-10-19 19:51:31,070]   Starting point 4/9 lead to a dead end
+[2016-10-19 19:51:31,070]   Starting point 5/9 lead to a dead end
+[2016-10-19 19:51:31,070]   Starting point 6/9 lead to a dead end
+[2016-10-19 19:51:31,071]   Starting point 7/9 lead to a dead end
+[2016-10-19 19:51:31,074] Solution found. Checking..
+[2016-10-19 19:51:31,074]   substring found: GDCA -> gbfe
+[2016-10-19 19:51:31,075]   substring found: AD -> eb
+[2016-10-19 19:51:31,075]   substring found: ABC -> eaf
+[2016-10-19 19:51:31,075]   substring found: ADGA -> ebge
+[2016-10-19 19:51:31,075]   substring found: GAEG -> geag
+[2016-10-19 19:51:31,075]   substring found: E -> a
+[2016-10-19 19:51:31,075]   substring found: GA -> ge
+[2016-10-19 19:51:31,075]   substring found: CADG -> febg
+[2016-10-19 19:51:31,075]   substring found: AE -> ea
+[2016-10-19 19:51:31,075]   substring found: ABC -> eaf
+[2016-10-19 19:51:31,075]   substring found: AE -> ea
+[2016-10-19 19:51:31,075]   substring found: C -> f
+[2016-10-19 19:51:31,075]   substring found: DdGb -> bdgb
+[2016-10-19 19:51:31,075]   substring found: D -> b
+[2016-10-19 19:51:31,075]   substring found: DFGD -> bdgb
+[2016-10-19 19:51:31,075]   substring found: D -> b
+[2016-10-19 19:51:31,075]   substring found: A -> e
+[2016-10-19 19:51:31,075]   substring found: CDDF -> fbbd
+[2016-10-19 19:51:31,075]   substring found: DC -> bf
+[2016-10-19 19:51:31,075]   substring found: CDC -> fbf
+[2016-10-19 19:51:31,163] Solution:
+[2016-10-19 19:51:31,163]   A -> e
+[2016-10-19 19:51:31,163]   B -> a
+[2016-10-19 19:51:31,163]   C -> f
+[2016-10-19 19:51:31,163]   D -> b
+[2016-10-19 19:51:31,163]   E -> a
+[2016-10-19 19:51:31,163]   F -> d
+[2016-10-19 19:51:31,163]   G -> g
+[2016-10-19 19:51:31,163] Solution written to: problems/test06.SOL
+[2016-10-19 19:51:31,163] Time taken: 0:00:00.121634
+
