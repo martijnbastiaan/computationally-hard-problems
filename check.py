@@ -136,9 +136,12 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
     var = next(filter(str.isupper, "".join(ts)))
     arguments = [(s, ts.copy(), rs.copy(), {var: x}, [-1]*len(ts)) for x in rs[var]]
 
+    log.info("Starting {} threads over {} starting points:".format(len(pool._pool), len(arguments)))
+
     # Cleanup done, start real algorithm
     try:
-        list(pool.imap_unordered(__A, arguments))
+        for n, _ in enumerate(pool.imap_unordered(__A, arguments)):
+            log.info("  Starting point {}/{} lead to a dead end".format(n+1, len(arguments)))
         #return _A(s, ts, rs, {}, [-1]*len(ts)), None
     except ResultFound as e:
         log.info("Solution found. Checking..")
