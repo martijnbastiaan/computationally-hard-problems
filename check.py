@@ -225,15 +225,16 @@ if __name__ == '__main__':
     result, replacements = main(l.strip() for l in open(filename))
     end = datetime.datetime.now()
 
-    solution_filename = sys.argv[1].replace(".SWE", ".SOL")
-    solution_file = open(solution_filename, "w")
-
     if result is True:
+        solution_filename = sys.argv[1].replace(".SWE", ".SOL")
+        solution_file = open(solution_filename, "w")
+
         log.info("Solution:")
         for k, v in replacements.items():
             log.info("  {} -> {}".format(k, v))
             solution_file.write("{}: {}\n".format(k, v))
         log.info("Solution written to: {}".format(solution_filename))
+        solution_file.close()
     else:
         log.info("No solution found")
 
