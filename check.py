@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from collections import OrderedDict
+
 from typing import Iterable, Tuple, Set, List, Dict
 
 import logging
@@ -84,7 +86,7 @@ def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, star
         starts = starts[1:]
 
     # We've passed all the clauses without encountering an error. Result found!
-    raise ResultFound(dict(chosen_replacements))
+    raise ResultFound(OrderedDict(sorted(chosen_replacements.items())))
 
 
 def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
@@ -115,12 +117,27 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
     if not all(rs.values()):
         return False
 
+    difficulty = 1
+    for v in rs.values():
+        difficulty *= len(v)
+
     log.info("Simplified to {k} clauses and {x} variables.".format(k=len(ts), x=len(rs)))
+    log.info("Difficulty: {} options.".format(difficulty))
 
     # Cleanup done, start real algorithm
     try:
         return _A(s, ts, rs, {}, [-1]*len(ts)), None
     except ResultFound as e:
+        log.info("Solution found. Checking..")
+        for old_clause in ts:
+            new_clause = old_clause
+            for var, replacement in e.replacements.items():
+                new_clause = new_clause.replace(var, replacement)
+            if new_clause in s:
+                log.info("  substring found: {} -> {}".format(old_clause, new_clause))
+            else:
+                log.error("  substring found: {} -> {}".format(old_clause, new_clause))
+                raise ValueError("substring not found, but A determined it valid. Bug!")
         return True, e.replacements
     
 
@@ -185,8 +202,16 @@ if __name__ == '__main__':
     filename = sys.argv[1]
     result, replacements = main(l.strip() for l in open(filename))
 
+    solution_filename = sys.argv[1].replace(".SWE", ".SOL")
+    solution_file = open(solution_filename, "w")
+
     if result is True:
-        log.info("Solution: {}".format(replacements))
+        log.info("Solution:")
+        for k, v in replacements.items():
+            log.info("  {} -> {}".format(k, v))
+            solution_file.write("{}: {}\n".format(k, v))
+        log.info("Solution written to: {}".format(solution_filename))
+
     else:
         log.info("No solution found")
 
