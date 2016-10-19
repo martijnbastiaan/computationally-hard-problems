@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from typing import Iterable, Tuple, Set, List, Dict
 
-import json
+import logging
 import string
 import sys
 
@@ -9,6 +9,8 @@ import sys
 LOWERCASE = set(string.ascii_lowercase)
 UPPERCASE = set(string.ascii_uppercase)
 ASCII_LETTERS = LOWERCASE | UPPERCASE
+
+log = logging.getLogger(__name__)
 
 
 class ResultFound(Exception):
@@ -24,8 +26,12 @@ def findall(string, sub, offset=0):
 
 
 def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, starts) -> bool:
-    # Positions indicate where we are when searching a 
-    for clausenr, (position, clause) in enumerate(zip(starts, ts)):
+    # Positions indicate where we are when searching a
+
+    while ts:
+        position = starts[0]
+        clause = ts[0]
+
         if position == -1:
             # We need to determine where we start reading this clause in the substr
             letter = clause[0]
@@ -35,7 +41,7 @@ def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, star
                 else:
                     # Iterate over all possibilities!
                     for replacement in rs[letter]:
-                        _chosen_replacement = dict(chosen_replacements)
+                        _chosen_replacement = chosen_replacements.copy()
                         _chosen_replacement[letter] = replacement
                         _A(s, ts, rs, _chosen_replacement, starts)
                     # We didn't find any possible results (no exception yielded), so we
@@ -46,8 +52,8 @@ def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, star
             # our first read of the clause, or if we found a replacement where we
             # need a start position for.
             for i in findall(s, letter):
-                _starts = list(starts)
-                _starts[clausenr] = i
+                _starts = starts.copy()
+                _starts[0] = i
                 _A(s, ts, rs, chosen_replacements, _starts)
             # We didn't find any possible results (no exception yielded), so we
             # we return False as going on is pointless.
@@ -60,7 +66,7 @@ def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, star
                 if letter.isupper():
                     # Found a uppercase letter not yet chosen
                     for replacement in rs[letter]:
-                        _chosen_replacement = dict(chosen_replacements)
+                        _chosen_replacement = chosen_replacements.copy()
                         _chosen_replacement[letter] = replacement
                         _A(s, ts, rs, _chosen_replacement, starts)
                     # We didn't find any possible results (no exception yielded), so we
@@ -74,7 +80,8 @@ def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, star
                     else:
                         position += len(letter)
 
-
+        ts = ts[1:]
+        starts = starts[1:]
 
     # We've passed all the clauses without encountering an error. Result found!
     raise ResultFound(dict(chosen_replacements))
@@ -108,6 +115,8 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
     if not all(rs.values()):
         return False
 
+    log.info("Simplified to {k} clauses and {x} variables.".format(k=len(ts), x=len(rs)))
+
     # Cleanup done, start real algorithm
     try:
         return _A(s, ts, rs, {}, [-1]*len(ts)), None
@@ -133,6 +142,8 @@ def get_rs(rs: Iterable[str]) -> Iterable[Tuple[str, Set[str]]]:
 
 def main(swe_lines: Iterable[str]) -> Tuple[bool, Dict]:
     """Decode given SWE file and run the decision algorithm"""
+    log.info("Parsing file..")
+
     try:
         k = int(next(swe_lines))
     except (ValueError, StopIteration):
@@ -161,18 +172,21 @@ def main(swe_lines: Iterable[str]) -> Tuple[bool, Dict]:
             raise ValueError("{} not found in replacement mapping".format(letter))
 
     # We're checked and ready!
+    log.info("Checking {s} with {k} clauses and {x} variables.".format(s=s, k=k, x=len(rs)))
     return A(s, ts, rs)
 
 
 if __name__ == '__main__':
+    # Setup logging
+    logging.basicConfig(format='[%(asctime)s] %(message)s')
+    logging.getLogger().setLevel(logging.DEBUG)
+
+    # Get file from command line
     filename = sys.argv[1]
     result, replacements = main(l.strip() for l in open(filename))
 
     if result is True:
-        print("YES:")
-        print(json.dumps(replacements))
-    elif result is False:
-        print("NO")
+        log.info("Solution: {}".format(replacements))
     else:
-        print("No answer found. A returned: {}. Bug?".format(result))
-    
+        log.info("No solution found")
+
