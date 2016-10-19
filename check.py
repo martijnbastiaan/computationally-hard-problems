@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from collections import OrderedDict
 
+import datetime
+
 from typing import Iterable, Tuple, Set, List, Dict
 
 import logging
@@ -199,8 +201,10 @@ if __name__ == '__main__':
     logging.getLogger().setLevel(logging.DEBUG)
 
     # Get file from command line
+    start = datetime.datetime.now()
     filename = sys.argv[1]
     result, replacements = main(l.strip() for l in open(filename))
+    end = datetime.datetime.now()
 
     solution_filename = sys.argv[1].replace(".SWE", ".SOL")
     solution_file = open(solution_filename, "w")
@@ -211,7 +215,8 @@ if __name__ == '__main__':
             log.info("  {} -> {}".format(k, v))
             solution_file.write("{}: {}\n".format(k, v))
         log.info("Solution written to: {}".format(solution_filename))
-
     else:
         log.info("No solution found")
+
+    log.info("Time taken: {}".format(end - start))
 
