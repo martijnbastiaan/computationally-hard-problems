@@ -3,6 +3,8 @@ from collections import OrderedDict
 
 import datetime
 
+import multiprocessing
+
 from typing import Iterable, Tuple, Set, List, Dict
 
 import logging
@@ -27,6 +29,10 @@ def findall(string, sub, offset=0):
     while i >= 0:
         yield i
         i = string.find(sub, i+1)
+
+
+def __A(args):
+    return _A(*args)
 
 
 def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, starts) -> bool:
@@ -126,9 +132,14 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
     log.info("Simplified to {k} clauses and {x} variables.".format(k=len(ts), x=len(rs)))
     log.info("Difficulty: {} options.".format(difficulty))
 
+    pool = multiprocessing.Pool()
+    var = next(filter(str.isupper, "".join(ts)))
+    arguments = [(s, ts.copy(), rs.copy(), {var: x}, [-1]*len(ts)) for x in rs[var]]
+
     # Cleanup done, start real algorithm
     try:
-        return _A(s, ts, rs, {}, [-1]*len(ts)), None
+        list(pool.imap_unordered(__A, arguments))
+        #return _A(s, ts, rs, {}, [-1]*len(ts)), None
     except ResultFound as e:
         log.info("Solution found. Checking..")
         for old_clause in ts:
@@ -141,6 +152,11 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
                 log.error("  substring found: {} -> {}".format(old_clause, new_clause))
                 raise ValueError("substring not found, but A determined it valid. Bug!")
         return True, e.replacements
+    else:
+        return False, None
+    finally:
+        pool.terminate()
+        pool.join()
     
 
 def get_rs(rs: Iterable[str]) -> Iterable[Tuple[str, Set[str]]]:
