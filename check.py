@@ -5,6 +5,8 @@ import datetime
 
 import multiprocessing
 
+import parser
+
 from typing import Iterable, Tuple, Set, List, Dict
 
 import logging
@@ -88,22 +90,6 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
     @param ts: k strings t1,t2...tk \in (E U T)*
     @param rs: mapping from element in T -> [expansion]
     """
-    # We first simplify the solution somewhat. If something maps to a letter
-    # not present in s it will never be a suitable replacement.
-    remove = set()
-    for replacements in rs.values():
-        for replacement in replacements:
-            if replacement not in s:
-                remove.add(replacement)
-        replacements -= remove
-
-    # Remove all replacements not mentioned. For example, C is never mentioned
-    # in first example so it's a needless burden.
-    keep = set(filter(str.isupper, "".join(ts)))
-    remove = set(rs.keys()) - keep
-    for r in remove:
-        del rs[r]
-
     # If any of the RHS's is now empty, we're requesting something impossible
     if not all(rs.values()):
         return False
@@ -112,7 +98,6 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
     for v in rs.values():
         difficulty *= len(v)
 
-    log.info("Simplified to {k} clauses and {x} variables.".format(k=len(ts), x=len(rs)))
     log.info("Difficulty: {} options.".format(difficulty))
 
     pool = multiprocessing.Pool()
@@ -145,71 +130,21 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
         pool.join()
     
 
-def get_rs(rs: Iterable[str]) -> Iterable[Tuple[str, Set[str]]]:
-    """Decode lines SWE lines containing the replacement mappings"""
-    for r in rs:
-        upper, lowers = r.split(":")
-        lowers = lowers.split(",")
-
-        if len(upper) != 1 or upper not in UPPERCASE:
-            raise ValueError("First character of R should be uppercase")
-        
-        for lower in lowers:
-            if not lower or not all(l in LOWERCASE for l in lower):
-                raise ValueError("All characters on RHS of R line should be lowercase")
-
-        yield upper, set(lowers)
-
-
-def main(swe_lines: Iterable[str]) -> Tuple[bool, Dict]:
-    """Decode given SWE file and run the decision algorithm"""
-    log.info("Parsing file..")
-
-    try:
-        k = int(next(swe_lines))
-    except (ValueError, StopIteration):
-        raise ValueError("First line must contain an integer")
-
-    # Get string which has to contain all substrings
-    s = next(swe_lines)
-    if not s or not all(l in LOWERCASE for l in s):
-        raise ValueError("String s should only contain lowercase letters")
-
-    # Get the collection of t's
-    ts = [next(swe_lines) for _ in range(k)]
-    for t in ts:
-        if not t or not all(l in ASCII_LETTERS for l in t):
-            raise ValueError("{} contained non-ascii chars".format(t))
-
-    # Get the collection of r's. The variable rs will contain a mapping
-    # from uppercase to the substitutions. For example: 'A' -> {'b', 'c'}.
-    rs = dict(get_rs(swe_lines))
-
-    # Check for illegal substitues
-    for letter in "".join(ts):
-        if letter in LOWERCASE:
-            continue
-        if letter not in rs:
-            raise ValueError("{} not found in replacement mapping".format(letter))
-
-    # We're checked and ready!
-    log.info("Checking {s} with {k} clauses and {x} variables.".format(s=s, k=k, x=len(rs)))
-    return A(s, ts, rs)
-
-
 if __name__ == '__main__':
     # Setup logging
     logging.basicConfig(format='[%(asctime)s] %(message)s')
     logging.getLogger().setLevel(logging.DEBUG)
 
     # Get file from command line
-    start = datetime.datetime.now()
     filename = sys.argv[1]
-    result, replacements = main(l.strip() for l in open(filename))
+    start = datetime.datetime.now()
+    swe_lines = (l.strip() for l in open(filename))
+    s, ts, rs = parser.parse(swe_lines)
+    result, replacements = A(s, ts, rs)
     end = datetime.datetime.now()
 
     if result is True:
-        solution_filename = sys.argv[1].replace(".SWE", ".SOL")
+        solution_filename = filename.replace(".SWE", ".SOL")
         solution_file = open(solution_filename, "w")
 
         log.info("Solution:")

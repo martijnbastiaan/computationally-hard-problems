@@ -1,13 +1,13 @@
-[2016-10-19 19:50:39,742] Parsing file..
-[2016-10-19 19:50:39,742] Checking abdde with 4 clauses and 5 variables.
-[2016-10-19 19:50:39,742] Simplified to 4 clauses and 4 variables.
-[2016-10-19 19:50:39,742] Difficulty: 375 options.
-[2016-10-19 19:50:39,758] Starting 4 threads over 5 starting points:
-[2016-10-19 19:50:39,759]   Starting point 1/5 lead to a dead end
-[2016-10-19 19:50:39,759]   Starting point 2/5 lead to a dead end
-[2016-10-19 19:50:39,759]   Starting point 3/5 lead to a dead end
-[2016-10-19 19:50:39,759]   Starting point 4/5 lead to a dead end
-[2016-10-19 19:50:39,759]   Starting point 5/5 lead to a dead end
-[2016-10-19 19:50:39,859] No solution found
-[2016-10-19 19:50:39,859] Time taken: 0:00:00.117258
-
+[2016-10-20 21:12:27,854] Parsing file..
+[2016-10-20 21:12:27,855] Found 0 double clauses, removing duplicates..
+[2016-10-20 21:12:27,855] Checking abdde with 4 clauses and 5 variables.
+[2016-10-20 21:12:27,855] Simplified to 4 clauses and 4 variables.
+[2016-10-20 21:12:27,855] Difficulty: 375 options.
+[2016-10-20 21:12:27,880] Starting 4 threads over 5 starting points:
+[2016-10-20 21:12:27,881]   Starting point 1/5 lead to a dead end
+[2016-10-20 21:12:27,881]   Starting point 2/5 lead to a dead end
+[2016-10-20 21:12:27,881]   Starting point 3/5 lead to a dead end
+[2016-10-20 21:12:27,881]   Starting point 4/5 lead to a dead end
+[2016-10-20 21:12:27,882]   Starting point 5/5 lead to a dead end
+[2016-10-20 21:12:27,981] No solution found
+[2016-10-20 21:12:27,981] Time taken: 0:00:00.126487

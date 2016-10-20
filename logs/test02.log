@@ -1,41 +1,37 @@
-[2016-10-19 19:50:46,477] Parsing file..
-[2016-10-19 19:50:46,482] Checking cdbbabcdbbbdbcdababcddaabcaddbaccbadabdacbadddcccabcccadcbbc with 21 clauses and 26 variables.
-[2016-10-19 19:50:46,485] Simplified to 21 clauses and 4 variables.
-[2016-10-19 19:50:46,485] Difficulty: 448 options.
-[2016-10-19 19:50:46,505] Starting 4 threads over 7 starting points:
-[2016-10-19 19:50:46,516]   Starting point 1/7 lead to a dead end
-[2016-10-19 19:50:46,516]   Starting point 2/7 lead to a dead end
-[2016-10-19 19:50:46,516]   Starting point 3/7 lead to a dead end
-[2016-10-19 19:50:46,516]   Starting point 4/7 lead to a dead end
-[2016-10-19 19:50:46,516]   Starting point 5/7 lead to a dead end
-[2016-10-19 19:50:46,526]   Starting point 6/7 lead to a dead end
-[2016-10-19 19:51:00,337] Solution found. Checking..
-[2016-10-19 19:51:00,337]   substring found: ADB -> bad
-[2016-10-19 19:51:00,337]   substring found: B -> d
-[2016-10-19 19:51:00,338]   substring found: cBBD -> cdda
-[2016-10-19 19:51:00,338]   substring found: ADA -> bab
-[2016-10-19 19:51:00,338]   substring found: CADB -> cbad
-[2016-10-19 19:51:00,338]   substring found: ABDC -> bdac
-[2016-10-19 19:51:00,338]   substring found: C -> c
-[2016-10-19 19:51:00,338]   substring found: C -> c
-[2016-10-19 19:51:00,338]   substring found: DBB -> add
-[2016-10-19 19:51:00,338]   substring found: DA -> ab
-[2016-10-19 19:51:00,338]   substring found: DAC -> abc
-[2016-10-19 19:51:00,338]   substring found: DACD -> abca
-[2016-10-19 19:51:00,338]   substring found: CADB -> cbad
-[2016-10-19 19:51:00,338]   substring found: CA -> cb
-[2016-10-19 19:51:00,338]   substring found: daAB -> dabd
-[2016-10-19 19:51:00,338]   substring found: D -> a
-[2016-10-19 19:51:00,338]   substring found: BD -> da
-[2016-10-19 19:51:00,338]   substring found: BBAD -> ddba
-[2016-10-19 19:51:00,338]   substring found: DcCA -> accb
-[2016-10-19 19:51:00,338]   substring found: aBBA -> addb
-[2016-10-19 19:51:00,338]   substring found: C -> c
-[2016-10-19 19:51:00,425] Solution:
-[2016-10-19 19:51:00,425]   A -> b
-[2016-10-19 19:51:00,425]   B -> d
-[2016-10-19 19:51:00,425]   C -> c
-[2016-10-19 19:51:00,426]   D -> a
-[2016-10-19 19:51:00,426] Solution written to: problems/test02.SOL
-[2016-10-19 19:51:00,426] Time taken: 0:00:13.948105
-
+[2016-10-20 21:12:32,014] Parsing file..
+[2016-10-20 21:12:32,014] Found 3 double clauses, removing duplicates..
+[2016-10-20 21:12:32,018] Checking cdbbabcdbbbdbcdababcddaabcaddbaccbadabdacbadddcccabcccadcbbc with 21 clauses and 26 variables.
+[2016-10-20 21:12:32,020] Simplified to 18 clauses and 4 variables.
+[2016-10-20 21:12:32,020] Difficulty: 448 options.
+[2016-10-20 21:12:32,035] Starting 4 threads over 7 starting points:
+[2016-10-20 21:12:32,036]   Starting point 1/7 lead to a dead end
+[2016-10-20 21:12:32,037]   Starting point 2/7 lead to a dead end
+[2016-10-20 21:12:32,037]   Starting point 3/7 lead to a dead end
+[2016-10-20 21:12:32,037]   Starting point 4/7 lead to a dead end
+[2016-10-20 21:12:32,038]   Starting point 5/7 lead to a dead end
+[2016-10-20 21:12:32,038] Solution found. Checking..
+[2016-10-20 21:12:32,038]   substring found: ABDC -> bdac
+[2016-10-20 21:12:32,038]   substring found: BBAD -> ddba
+[2016-10-20 21:12:32,038]   substring found: CADB -> cbad
+[2016-10-20 21:12:32,038]   substring found: DACD -> abca
+[2016-10-20 21:12:32,038]   substring found: DcCA -> accb
+[2016-10-20 21:12:32,038]   substring found: aBBA -> addb
+[2016-10-20 21:12:32,038]   substring found: cBBD -> cdda
+[2016-10-20 21:12:32,038]   substring found: daAB -> dabd
+[2016-10-20 21:12:32,038]   substring found: ADA -> bab
+[2016-10-20 21:12:32,038]   substring found: ADB -> bad
+[2016-10-20 21:12:32,038]   substring found: DAC -> abc
+[2016-10-20 21:12:32,038]   substring found: DBB -> add
+[2016-10-20 21:12:32,038]   substring found: BD -> da
+[2016-10-20 21:12:32,038]   substring found: CA -> cb
+[2016-10-20 21:12:32,038]   substring found: DA -> ab
+[2016-10-20 21:12:32,038]   substring found: B -> d
+[2016-10-20 21:12:32,038]   substring found: C -> c
+[2016-10-20 21:12:32,039]   substring found: D -> a
+[2016-10-20 21:12:32,136] Solution:
+[2016-10-20 21:12:32,136]   A -> b
+[2016-10-20 21:12:32,136]   B -> d
+[2016-10-20 21:12:32,136]   C -> c
+[2016-10-20 21:12:32,136]   D -> a
+[2016-10-20 21:12:32,136] Solution written to: problems/test02.SOL
+[2016-10-20 21:12:32,136] Time taken: 0:00:00.121727

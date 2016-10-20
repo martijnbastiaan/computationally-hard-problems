@@ -1,36 +1,31 @@
-[2016-10-19 19:51:12,358] Parsing file..
-[2016-10-19 19:51:12,361] Checking eaedeadefcgfbgddfffcaabaaedegdgbadafaddbdebafeddffgdedgcfccb with 14 clauses and 26 variables.
-[2016-10-19 19:51:12,364] Simplified to 14 clauses and 5 variables.
-[2016-10-19 19:51:12,364] Difficulty: 45864 options.
-[2016-10-19 19:51:12,379] Starting 4 threads over 13 starting points:
-[2016-10-19 19:51:12,396]   Starting point 1/13 lead to a dead end
-[2016-10-19 19:51:12,410]   Starting point 2/13 lead to a dead end
-[2016-10-19 19:51:12,482]   Starting point 3/13 lead to a dead end
-[2016-10-19 19:51:12,497]   Starting point 4/13 lead to a dead end
-[2016-10-19 19:51:12,548]   Starting point 5/13 lead to a dead end
-[2016-10-19 19:51:12,555]   Starting point 6/13 lead to a dead end
-[2016-10-19 19:51:12,565]   Starting point 7/13 lead to a dead end
-[2016-10-19 19:51:12,572] Solution found. Checking..
-[2016-10-19 19:51:12,572]   substring found: BG -> gd
-[2016-10-19 19:51:12,572]   substring found: E -> b
-[2016-10-19 19:51:12,572]   substring found: FF -> aa
-[2016-10-19 19:51:12,572]   substring found: EFGF -> bada
-[2016-10-19 19:51:12,572]   substring found: FFE -> aab
-[2016-10-19 19:51:12,572]   substring found: FaD -> aae
-[2016-10-19 19:51:12,572]   substring found: GBbF -> dgba
-[2016-10-19 19:51:12,572]   substring found: DGDB -> edeg
-[2016-10-19 19:51:12,573]   substring found: DG -> ed
-[2016-10-19 19:51:12,573]   substring found: B -> g
-[2016-10-19 19:51:12,573]   substring found: DGDB -> edeg
-[2016-10-19 19:51:12,573]   substring found: B -> g
-[2016-10-19 19:51:12,573]   substring found: E -> b
-[2016-10-19 19:51:12,573]   substring found: FF -> aa
-[2016-10-19 19:51:12,580] Solution:
-[2016-10-19 19:51:12,580]   B -> g
-[2016-10-19 19:51:12,580]   D -> e
-[2016-10-19 19:51:12,580]   E -> b
-[2016-10-19 19:51:12,580]   F -> a
-[2016-10-19 19:51:12,580]   G -> d
-[2016-10-19 19:51:12,580] Solution written to: problems/test04.SOL
-[2016-10-19 19:51:12,580] Time taken: 0:00:00.221379
-
+[2016-10-20 21:12:41,039] Parsing file..
+[2016-10-20 21:12:41,039] Found 4 double clauses, removing duplicates..
+[2016-10-20 21:12:41,043] Checking eaedeadefcgfbgddfffcaabaaedegdgbadafaddbdebafeddffgdedgcfccb with 14 clauses and 26 variables.
+[2016-10-20 21:12:41,046] Simplified to 10 clauses and 5 variables.
+[2016-10-20 21:12:41,046] Difficulty: 45864 options.
+[2016-10-20 21:12:41,064] Starting 4 threads over 8 starting points:
+[2016-10-20 21:12:41,069]   Starting point 1/8 lead to a dead end
+[2016-10-20 21:12:41,069]   Starting point 2/8 lead to a dead end
+[2016-10-20 21:12:41,069]   Starting point 3/8 lead to a dead end
+[2016-10-20 21:12:41,069]   Starting point 4/8 lead to a dead end
+[2016-10-20 21:12:41,069]   Starting point 5/8 lead to a dead end
+[2016-10-20 21:12:41,069]   Starting point 6/8 lead to a dead end
+[2016-10-20 21:12:41,069] Solution found. Checking..
+[2016-10-20 21:12:41,069]   substring found: DGDB -> edeg
+[2016-10-20 21:12:41,069]   substring found: EFGF -> bada
+[2016-10-20 21:12:41,069]   substring found: GBbF -> dgba
+[2016-10-20 21:12:41,069]   substring found: FFE -> aab
+[2016-10-20 21:12:41,069]   substring found: FaD -> aae
+[2016-10-20 21:12:41,069]   substring found: BG -> gd
+[2016-10-20 21:12:41,069]   substring found: DG -> ed
+[2016-10-20 21:12:41,069]   substring found: FF -> aa
+[2016-10-20 21:12:41,069]   substring found: B -> g
+[2016-10-20 21:12:41,069]   substring found: E -> b
+[2016-10-20 21:12:41,165] Solution:
+[2016-10-20 21:12:41,165]   B -> g
+[2016-10-20 21:12:41,165]   D -> e
+[2016-10-20 21:12:41,165]   E -> b
+[2016-10-20 21:12:41,165]   F -> a
+[2016-10-20 21:12:41,165]   G -> d
+[2016-10-20 21:12:41,165] Solution written to: problems/test04.SOL
+[2016-10-20 21:12:41,165] Time taken: 0:00:00.125898

@@ -1,11 +1,13 @@
-[2016-10-19 19:51:21,528] Parsing file..
-[2016-10-19 19:51:21,531] Checking dhddagcgdageecbgcchdggdhgceegeagagecggahbeabehegahedccdbgaegdacbgcbgceabdeghdgga with 40 clauses and 26 variables.
-[2016-10-19 19:51:21,534] Simplified to 40 clauses and 7 variables.
-[2016-10-19 19:51:21,534] Difficulty: 69120 options.
-[2016-10-19 19:51:21,549] Starting 4 threads over 3 starting points:
-[2016-10-19 19:51:21,550]   Starting point 1/3 lead to a dead end
-[2016-10-19 19:51:21,551]   Starting point 2/3 lead to a dead end
-[2016-10-19 19:51:21,551]   Starting point 3/3 lead to a dead end
-[2016-10-19 19:51:21,650] No solution found
-[2016-10-19 19:51:21,651] Time taken: 0:00:00.122426
-
+[2016-10-20 21:12:45,888] Parsing file..
+[2016-10-20 21:12:45,888] Found 7 double clauses, removing duplicates..
+[2016-10-20 21:12:45,892] Checking dhddagcgdageecbgcchdggdhgceegeagagecggahbeabehegahedccdbgaegdacbgcbgceabdeghdgga with 40 clauses and 26 variables.
+[2016-10-20 21:12:45,895] Simplified to 33 clauses and 7 variables.
+[2016-10-20 21:12:45,895] Difficulty: 69120 options.
+[2016-10-20 21:12:45,913] Starting 4 threads over 5 starting points:
+[2016-10-20 21:12:45,914]   Starting point 1/5 lead to a dead end
+[2016-10-20 21:12:45,914]   Starting point 2/5 lead to a dead end
+[2016-10-20 21:12:45,914]   Starting point 3/5 lead to a dead end
+[2016-10-20 21:12:45,914]   Starting point 4/5 lead to a dead end
+[2016-10-20 21:12:45,914]   Starting point 5/5 lead to a dead end
+[2016-10-20 21:12:46,014] No solution found
+[2016-10-20 21:12:46,014] Time taken: 0:00:00.125710
