@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import logging
 import string
+import sys
+from collections import OrderedDict
 
 from typing import Iterable, Tuple, Dict, List, Set
 
@@ -44,6 +46,9 @@ def simplify_problem(s, ts, rs):
     for r in remove:
         del rs[r]
 
+    for k in list(rs.keys()):
+        rs[k] = sorted(rs[k], key=lambda c: (-len(c), c))
+
     log.info("Simplified to {k} clauses and {x} variables.".format(k=len(ts), x=len(rs)))
     return s, ts, rs
 
@@ -75,7 +80,7 @@ def parse(swe_lines: Iterable[str]) -> Tuple[str, List[str], Dict[str, Set[str]]
 
     # Get the collection of r's. The variable rs will contain a mapping
     # from uppercase to the substitutions. For example: 'A' -> {'b', 'c'}.
-    rs = dict(get_rs(swe_lines))
+    rs = OrderedDict(sorted(get_rs(swe_lines)))
 
     # Check for illegal substitues
     for letter in "".join(ts):
@@ -84,6 +89,23 @@ def parse(swe_lines: Iterable[str]) -> Tuple[str, List[str], Dict[str, Set[str]]
         if letter not in rs:
             raise ValueError("{} not found in replacement mapping".format(letter))
 
-    log.info("Checking {s} with {k} clauses and {x} variables.".format(s=s, k=k, x=len(rs)))
     return simplify_problem(s, ts, rs)
+
+
+if __name__ == '__main__':
+    # Setup logging
+    logging.basicConfig(format='[%(asctime)s] %(message)s')
+    logging.getLogger().setLevel(logging.DEBUG)
+
+    swe_lines = (l.strip() for l in open(sys.argv[1]))
+    s, ts, rs = parse(swe_lines)
+
+    log.info("String found: {}".format(s))
+    log.info("Clauses found:")
+    for clause in ts:
+        log.info("  {}".format(clause))
+
+    log.info("Possible expansions:")
+    for k, expansions in rs.items():
+        log.info("  {} -> {}".format(k, expansions))
 

@@ -90,6 +90,8 @@ def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
     @param ts: k strings t1,t2...tk \in (E U T)*
     @param rs: mapping from element in T -> [expansion]
     """
+    log.info("Checking {s} with {k} clauses and {x} variables.".format(s=s, k=len(ts), x=len(rs)))
+
     # If any of the RHS's is now empty, we're requesting something impossible
     if not all(rs.values()):
         return False
