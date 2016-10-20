@@ -42,54 +42,37 @@ def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, star
         position = starts[0]
         clause = ts[0]
 
-        if position == -1:
-            # We need to determine where we start reading this clause in the substr
-            letter = clause[0]
-            if letter.isupper():
-                if letter in chosen_replacements:
-                    letter = chosen_replacements[letter]
-                else:
-                    # Iterate over all possibilities!
-                    for replacement in rs[letter]:
-                        _chosen_replacement = chosen_replacements.copy()
-                        _chosen_replacement[letter] = replacement
-                        _A(s, ts, rs, _chosen_replacement, starts)
-                    # We didn't find any possible results (no exception yielded), so we
-                    # we return False as going on is pointless.
+        for letter in clause:
+            letter_or_expansion = chosen_replacements.get(letter, letter)
+
+            # CASE 1
+            if letter_or_expansion.isupper():
+                # We found a capital letter, meaning we should choose a replacement for it: so
+                # we branch off with all possible replacements
+                for replacement in rs[letter_or_expansion]:
+                    _chosen_replacement = chosen_replacements.copy()
+                    _chosen_replacement[letter_or_expansion] = replacement
+                    _A(s, ts, rs, _chosen_replacement, starts)
+                return False
+
+            # We see a small letter
+            if position >= 0:
+                # ..if its position is known, just check it and move on to next letter in clause
+                # Please not that 'letter' can also be more than one character if it a replacement
+                if not s[position:].startswith(letter_or_expansion):
+                    # Expansion does not fit here in this string. Invalid branch!
                     return False
 
-            # We arrive at this point if we either encountered a small letter at
-            # our first read of the clause, or if we found a replacement where we
-            # need a start position for.
-            for i in findall(s, letter):
-                _starts = starts.copy()
-                _starts[0] = i
-                _A(s, ts, rs, chosen_replacements, _starts)
-            # We didn't find any possible results (no exception yielded), so we
-            # we return False as going on is pointless.
-            return False
-        else:
-            # We arrive here if we start scanning a clause and a start has already
-            # been defined. 
-            for letter in clause:
-                letter = chosen_replacements.get(letter, letter)
-                if letter.isupper():
-                    # Found a uppercase letter not yet chosen
-                    for replacement in rs[letter]:
-                        _chosen_replacement = chosen_replacements.copy()
-                        _chosen_replacement[letter] = replacement
-                        _A(s, ts, rs, _chosen_replacement, starts)
-                    # We didn't find any possible results (no exception yielded), so we
-                    # we return False as going on is pointless.
-                    return False
-                else:
-                    # Replacement either already defined or we found a lowercase letter
-                    if not s[position:].startswith(letter):
-                        # Non-suitable replacement found
-                        return False
-                    else:
-                        position += len(letter)
+                position += len(letter_or_expansion)
+            else:
+                # .. its position is not known. Find all suitable starting places.
+                for i in findall(s, letter_or_expansion):
+                    _starts = starts.copy()
+                    _starts[0] = i
+                    _A(s, ts, rs, chosen_replacements, _starts)
+                return False
 
+        # We have finished a clause, lets move on to the next
         ts = ts[1:]
         starts = starts[1:]
 
