@@ -37,24 +37,24 @@ def __A(args):
     return _A(*args)
 
 
-def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, starts) -> bool:
+def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], expansions, positions) -> bool:
     # Positions indicate where we are when searching a
 
     while ts:
-        position = starts[0]
+        position = positions[0]
         clause = ts[0]
 
         for letter in clause:
-            letter_or_expansion = chosen_replacements.get(letter, letter)
+            letter_or_expansion = expansions.get(letter, letter)
 
             # CASE 1
             if letter_or_expansion.isupper():
                 # We found a capital letter, meaning we should choose a replacement for it: so
                 # we branch off with all possible replacements
                 for replacement in rs[letter_or_expansion]:
-                    _chosen_replacement = chosen_replacements.copy()
-                    _chosen_replacement[letter_or_expansion] = replacement
-                    _A(s, ts, rs, _chosen_replacement, starts)
+                    _expansions = expansions.copy()
+                    _expansions[letter_or_expansion] = replacement
+                    _A(s, ts, rs, _expansions, positions)
                 return False
 
             # We see a small letter
@@ -69,17 +69,17 @@ def _A(s: str, ts: List[str], rs: Dict[str, Set[str]], chosen_replacements, star
             else:
                 # .. its position is not known. Find all suitable starting places.
                 for i in findall(s, letter_or_expansion):
-                    _starts = starts.copy()
-                    _starts[0] = i
-                    _A(s, ts, rs, chosen_replacements, _starts)
+                    _positions = positions.copy()
+                    _positions[0] = i
+                    _A(s, ts, rs, expansions, _positions)
                 return False
 
         # We have finished a clause, lets move on to the next
         ts = ts[1:]
-        starts = starts[1:]
+        positions = positions[1:]
 
     # We've passed all the clauses without encountering an error. Result found!
-    raise ResultFound(OrderedDict(sorted(chosen_replacements.items())))
+    raise ResultFound(OrderedDict(sorted(expansions.items())))
 
 
 def A(s: str, ts: List[str], rs: Dict[str, Set[str]]) -> Tuple[bool, Dict]:
