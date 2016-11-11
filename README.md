@@ -1,12 +1,17 @@
-# Computationally Hard Problems: project implementation
+# Computationally Hard Problems
+Install:
+
+```bash
+sudo apt-get install python3 
+```
 
 Run:
 
 ```bash
-python3 check.py problems/test01.SWE
+python3 check.py contest/contest01.SWE
 ```
 
-to check a specific file. Solutions will be placed alongside the given file.
+to check a specific file. Solutions will be placed alongside the given file (if found). Intermediate results will be printed to stdout, as per the contest rules. Logging information will be printed to stderr.
 
 # Solutions
 You can find all solutions in `solutions/`. The log files for these runs can be found in `logs/`. The answer to the puzzles is as follows:
